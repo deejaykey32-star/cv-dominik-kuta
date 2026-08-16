@@ -6,7 +6,7 @@ interface EditableFieldProps {
   onChange: (val: string) => void;
   multiline?: boolean;
   className?: string;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: keyof React.JSX.IntrinsicElements;
 }
 
 export function EditableField({ 
