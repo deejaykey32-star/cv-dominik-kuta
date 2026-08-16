@@ -6,22 +6,26 @@ interface Props {
 }
 
 /**
- * Single-page A4 print template (794×1123px).
- * Large fonts, full-page layout — no buttons, no badges.
+ * Single-page A4 print template (794×1123px @ 96dpi).
+ * Base font: 12pt = 16px. All sizes derived from this scale.
+ * No buttons, no badges — pure CV document.
  */
 export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, ref) => {
-  const SIDEBAR         = '#1C2B3A';
-  const SIDEBAR_ACCENT  = '#2E7D8C';
-  const SIDEBAR_TEXT    = '#E8EDF2';
-  const SIDEBAR_MUTED   = '#A8B8C8';
-  const ACCENT          = '#1C2B3A';
-  const DIVIDER         = '#D0D8E0';
-  const BODY            = '#1A1A2E';
-  const MUTED           = '#4A5568';
+  // 1pt = 1.333px  →  12pt = 16px  (96dpi standard)
+  const pt = (n: number) => `${(n * 1.333).toFixed(1)}px`;
+
+  const SIDEBAR        = '#1C2B3A';
+  const SIDEBAR_ACCENT = '#2E7D8C';
+  const SIDEBAR_TEXT   = '#E8EDF2';
+  const SIDEBAR_MUTED  = '#A8B8C8';
+  const ACCENT         = '#1C2B3A';
+  const DIVIDER        = '#D0D8E0';
+  const BODY           = '#1A1A2E';
+  const MUTED          = '#4A5568';
 
   const sh = (light = false): React.CSSProperties => ({
     fontFamily: 'Georgia, serif',
-    fontSize: '9.5px',
+    fontSize: pt(8),          // 8pt section labels
     fontWeight: 'bold',
     letterSpacing: '2px',
     textTransform: 'uppercase' as const,
@@ -38,6 +42,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         width: '794px',
         height: '1123px',
         fontFamily: 'Arial, Helvetica, sans-serif',
+        fontSize: pt(12),     // 12pt base
         color: BODY,
         backgroundColor: '#FFFFFF',
         display: 'flex',
@@ -48,10 +53,10 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
     >
       {/* ─── LEFT SIDEBAR ─── */}
       <div style={{
-        width: '262px',
+        width: '268px',
         height: '1123px',
         backgroundColor: SIDEBAR,
-        padding: '32px 22px',
+        padding: '28px 20px',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
@@ -64,7 +69,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         <div>
           <div style={{
             fontFamily: 'Georgia, serif',
-            fontSize: '28px',
+            fontSize: pt(22),   // 22pt name
             fontWeight: 'bold',
             color: '#FFFFFF',
             lineHeight: '1.15',
@@ -73,9 +78,9 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
             {cvData.name}
           </div>
           <div style={{
-            fontSize: '10px',
+            fontSize: pt(9),    // 9pt title
             color: SIDEBAR_MUTED,
-            lineHeight: '1.75',
+            lineHeight: '1.8',
             borderLeft: `2px solid ${SIDEBAR_ACCENT}`,
             paddingLeft: '9px',
           }}>
@@ -88,30 +93,28 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         {/* Contact */}
         <div>
           <div style={sh(true)}>Kontakt</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: SIDEBAR_ACCENT, fontSize: '10px', flexShrink: 0 }}>✆</span>
-              <span style={{ color: SIDEBAR_TEXT, fontSize: '11px' }}>{cvData.phone}</span>
-            </div>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: SIDEBAR_ACCENT, fontSize: '10px', flexShrink: 0 }}>✉</span>
-              <span style={{ color: SIDEBAR_TEXT, fontSize: '10.5px', wordBreak: 'break-all' as const }}>{cvData.email}</span>
-            </div>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: SIDEBAR_ACCENT, fontSize: '10px', flexShrink: 0 }}>◎</span>
-              <span style={{ color: SIDEBAR_TEXT, fontSize: '11px' }}>Polska</span>
-            </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+            {[
+              { icon: '✆', val: cvData.phone },
+              { icon: '✉', val: cvData.email },
+              { icon: '◎', val: 'Polska' },
+            ].map(({ icon, val }) => (
+              <div key={icon} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                <span style={{ color: SIDEBAR_ACCENT, fontSize: pt(10), flexShrink: 0 }}>{icon}</span>
+                <span style={{ color: SIDEBAR_TEXT, fontSize: pt(10.5), wordBreak: 'break-all' as const, lineHeight: '1.5' }}>{val}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Skills */}
         <div>
           <div style={sh(true)}>Umiejętności</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
             {Object.entries(cvData.skills).map(([category, items]) => (
               <div key={category}>
                 <div style={{
-                  fontSize: '9px',
+                  fontSize: pt(7.5),   // 7.5pt category label
                   fontWeight: 'bold',
                   color: SIDEBAR_ACCENT,
                   marginBottom: '3px',
@@ -120,7 +123,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                 }}>
                   {category}
                 </div>
-                <div style={{ color: SIDEBAR_TEXT, fontSize: '10.5px', lineHeight: '1.7' }}>
+                <div style={{ color: SIDEBAR_TEXT, fontSize: pt(10), lineHeight: '1.7' }}>
                   {items.join('  ·  ')}
                 </div>
               </div>
@@ -131,9 +134,9 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         {/* Languages */}
         <div>
           <div style={sh(true)}>Języki</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
             {cvData.languages.map((lang, i) => (
-              <div key={i} style={{ color: SIDEBAR_TEXT, fontSize: '11px' }}>{lang}</div>
+              <div key={i} style={{ color: SIDEBAR_TEXT, fontSize: pt(11) }}>{lang}</div>
             ))}
           </div>
         </div>
@@ -141,9 +144,9 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         {/* Interests */}
         <div>
           <div style={sh(true)}>Zainteresowania</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             {cvData.interests.map((item, i) => (
-              <div key={i} style={{ color: SIDEBAR_MUTED, fontSize: '10.5px', lineHeight: '1.55' }}>
+              <div key={i} style={{ color: SIDEBAR_MUTED, fontSize: pt(10.5), lineHeight: '1.55' }}>
                 {item}
               </div>
             ))}
@@ -155,7 +158,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
       {/* ─── RIGHT MAIN CONTENT ─── */}
       <div style={{
         flex: 1,
-        padding: '32px 32px 24px 30px',
+        padding: '28px 30px 22px 28px',
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
@@ -168,7 +171,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         <div>
           <div style={sh()}>Profil Zawodowy</div>
           <p style={{
-            fontSize: '11px',
+            fontSize: pt(12),   // 12pt — standard body
             color: MUTED,
             lineHeight: '1.8',
             margin: '0',
@@ -198,20 +201,20 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                   <div>
                     <span style={{
                       fontFamily: 'Georgia, serif',
-                      fontSize: '12.5px',
+                      fontSize: pt(13),   // 13pt position title
                       fontWeight: 'bold',
                       color: BODY,
                     }}>
                       {exp.position}
                     </span>
                     {exp.company && (
-                      <span style={{ fontSize: '11px', color: MUTED, marginLeft: '6px' }}>
+                      <span style={{ fontSize: pt(11), color: MUTED, marginLeft: '6px' }}>
                         — {exp.company}
                       </span>
                     )}
                   </div>
                   <span style={{
-                    fontSize: '10px',
+                    fontSize: pt(10),
                     color: SIDEBAR_ACCENT,
                     fontWeight: 'bold',
                     whiteSpace: 'nowrap' as const,
@@ -223,7 +226,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                 <ul style={{ margin: '2px 0 0 0', padding: '0 0 0 16px', listStyle: 'disc' }}>
                   {exp.bullets.map((bullet, i) => (
                     <li key={i} style={{
-                      fontSize: '10.5px',
+                      fontSize: pt(11),   // 11pt bullets
                       color: MUTED,
                       lineHeight: '1.7',
                       paddingLeft: '2px',
@@ -251,19 +254,19 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                 <div style={{ flex: 1 }}>
                   <div style={{
                     fontFamily: 'Georgia, serif',
-                    fontSize: '11.5px',
+                    fontSize: pt(12),   // 12pt degree
                     fontWeight: 'bold',
                     color: BODY,
                     lineHeight: '1.4',
                   }}>
                     {edu.degree}
                   </div>
-                  <div style={{ fontSize: '10px', color: MUTED, marginTop: '1px' }}>
+                  <div style={{ fontSize: pt(10.5), color: MUTED, marginTop: '2px' }}>
                     {edu.school}
                   </div>
                 </div>
                 <span style={{
-                  fontSize: '10px',
+                  fontSize: pt(10),
                   color: SIDEBAR_ACCENT,
                   fontWeight: 'bold',
                   whiteSpace: 'nowrap' as const,
@@ -277,9 +280,9 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         </div>
 
         {/* RODO */}
-        <div style={{ paddingTop: '12px', borderTop: `1px solid ${DIVIDER}` }}>
+        <div style={{ paddingTop: '10px', borderTop: `1px solid ${DIVIDER}` }}>
           <p style={{
-            fontSize: '7.5px',
+            fontSize: pt(7),    // 7pt legal note
             color: '#9CA3AF',
             lineHeight: '1.6',
             margin: '0',
