@@ -6,9 +6,9 @@ interface Props {
 }
 
 /**
- * A4-proportioned, print-ready CV template rendered off-screen.
- * Captured by html2canvas for PDF export — no buttons, no badges, no UI chrome.
- * Uses inline styles to guarantee rendering consistency across browsers.
+ * Single-page A4 print template (794×1123px).
+ * Fonts scaled up to fill the full page.
+ * No buttons, no badges — pure CV document.
  */
 export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, ref) => {
   const SIDEBAR = '#1C2B3A';
@@ -22,14 +22,14 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
 
   const sectionHeader = (title: string, light = false): React.CSSProperties => ({
     fontFamily: 'Georgia, serif',
-    fontSize: '7px',
+    fontSize: '8.5px',
     fontWeight: 'bold',
     letterSpacing: '2px',
     textTransform: 'uppercase' as const,
     color: light ? SIDEBAR_ACCENT : ACCENT,
     borderBottom: `1px solid ${light ? 'rgba(255,255,255,0.15)' : DIVIDER}`,
     paddingBottom: '4px',
-    marginBottom: '8px',
+    marginBottom: '9px',
     marginTop: '0px',
   });
 
@@ -38,9 +38,9 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
       ref={ref}
       style={{
         width: '794px',
-        minHeight: '1123px',
+        height: '1123px',
         fontFamily: 'Arial, Helvetica, sans-serif',
-        fontSize: '9px',
+        fontSize: '10px',
         lineHeight: '1.5',
         color: BODY,
         backgroundColor: '#FFFFFF',
@@ -53,140 +53,135 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
       {/* ─── LEFT SIDEBAR ─── */}
       <div
         style={{
-          width: '252px',
-          minHeight: '1123px',
+          width: '258px',
+          height: '1123px',
           backgroundColor: SIDEBAR,
           padding: '36px 22px',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0px',
+          justifyContent: 'space-between',
           flexShrink: 0,
+          overflow: 'hidden',
         }}
       >
-        {/* Name & Title (in sidebar) */}
-        <div style={{ marginBottom: '28px' }}>
-          <div style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: '22px',
-            fontWeight: 'bold',
-            color: '#FFFFFF',
-            lineHeight: '1.2',
-            marginBottom: '8px',
-          }}>
-            {cvData.name}
-          </div>
-          <div style={{
-            fontSize: '8px',
-            color: SIDEBAR_MUTED,
-            lineHeight: '1.6',
-            borderLeft: `2px solid ${SIDEBAR_ACCENT}`,
-            paddingLeft: '8px',
-          }}>
-            {cvData.title.split(' | ').map((part, i) => (
-              <div key={i}>{part}</div>
-            ))}
-          </div>
-        </div>
-
-        {/* Contact */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={sectionHeader('Kontakt', true)}>Kontakt</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
-              <span style={{ color: SIDEBAR_ACCENT, fontSize: '8px', marginTop: '1px', flexShrink: 0 }}>✆</span>
-              <span style={{ color: SIDEBAR_TEXT, fontSize: '8.5px' }}>{cvData.phone}</span>
+        {/* Top group: Name + Contact + Skills */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+          {/* Name & Title */}
+          <div style={{ marginBottom: '22px' }}>
+            <div style={{
+              fontFamily: 'Georgia, serif',
+              fontSize: '26px',
+              fontWeight: 'bold',
+              color: '#FFFFFF',
+              lineHeight: '1.15',
+              marginBottom: '10px',
+            }}>
+              {cvData.name}
             </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
-              <span style={{ color: SIDEBAR_ACCENT, fontSize: '8px', marginTop: '1px', flexShrink: 0 }}>✉</span>
-              <span style={{ color: SIDEBAR_TEXT, fontSize: '8px', wordBreak: 'break-all' as const }}>{cvData.email}</span>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '6px' }}>
-              <span style={{ color: SIDEBAR_ACCENT, fontSize: '8px', marginTop: '1px', flexShrink: 0 }}>◎</span>
-              <span style={{ color: SIDEBAR_TEXT, fontSize: '8.5px' }}>Polska</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Skills */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={sectionHeader('Umiejetnosci', true)}>Umiejętności</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {Object.entries(cvData.skills).map(([category, items]) => (
-              <div key={category}>
-                <div style={{
-                  fontSize: '7.5px',
-                  fontWeight: 'bold',
-                  color: SIDEBAR_ACCENT,
-                  marginBottom: '3px',
-                  textTransform: 'uppercase' as const,
-                  letterSpacing: '0.5px',
-                }}>
-                  {category}
-                </div>
-                <div style={{ color: SIDEBAR_TEXT, fontSize: '8px', lineHeight: '1.6' }}>
-                  {items.join('  ·  ')}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Languages */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={sectionHeader('Jezyki', true)}>Języki</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-            {cvData.languages.map((lang, i) => (
-              <div key={i} style={{ color: SIDEBAR_TEXT, fontSize: '8.5px' }}>{lang}</div>
-            ))}
-          </div>
-        </div>
-
-        {/* Interests */}
-        <div style={{ marginBottom: '20px' }}>
-          <div style={sectionHeader('Zainteresowania', true)}>Zainteresowania</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-            {cvData.interests.map((item, i) => (
-              <div key={i} style={{ color: SIDEBAR_MUTED, fontSize: '8px', lineHeight: '1.5' }}>
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Additional */}
-        {cvData.additional && cvData.additional.length > 0 && (
-          <div style={{ marginBottom: '20px' }}>
-            <div style={sectionHeader('Dodatkowe', true)}>Dodatkowe</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
-              {cvData.additional.map((item, i) => (
-                <div key={i} style={{ color: SIDEBAR_MUTED, fontSize: '8px', lineHeight: '1.5' }}>{item}</div>
+            <div style={{
+              fontSize: '9.5px',
+              color: SIDEBAR_MUTED,
+              lineHeight: '1.7',
+              borderLeft: `2px solid ${SIDEBAR_ACCENT}`,
+              paddingLeft: '9px',
+            }}>
+              {cvData.title.split(' | ').map((part, i) => (
+                <div key={i}>{part}</div>
               ))}
             </div>
           </div>
-        )}
+
+          {/* Contact */}
+          <div style={{ marginBottom: '22px' }}>
+            <div style={sectionHeader('Kontakt', true)}>Kontakt</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '7px' }}>
+                <span style={{ color: SIDEBAR_ACCENT, fontSize: '9px', marginTop: '1px', flexShrink: 0 }}>✆</span>
+                <span style={{ color: SIDEBAR_TEXT, fontSize: '10px' }}>{cvData.phone}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '7px' }}>
+                <span style={{ color: SIDEBAR_ACCENT, fontSize: '9px', marginTop: '1px', flexShrink: 0 }}>✉</span>
+                <span style={{ color: SIDEBAR_TEXT, fontSize: '9.5px', wordBreak: 'break-all' as const }}>{cvData.email}</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '7px' }}>
+                <span style={{ color: SIDEBAR_ACCENT, fontSize: '9px', marginTop: '1px', flexShrink: 0 }}>◎</span>
+                <span style={{ color: SIDEBAR_TEXT, fontSize: '10px' }}>Polska</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Skills */}
+          <div style={{ marginBottom: '22px' }}>
+            <div style={sectionHeader('Umiejetnosci', true)}>Umiejętności</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '11px' }}>
+              {Object.entries(cvData.skills).map(([category, items]) => (
+                <div key={category}>
+                  <div style={{
+                    fontSize: '8.5px',
+                    fontWeight: 'bold',
+                    color: SIDEBAR_ACCENT,
+                    marginBottom: '3px',
+                    textTransform: 'uppercase' as const,
+                    letterSpacing: '0.5px',
+                  }}>
+                    {category}
+                  </div>
+                  <div style={{ color: SIDEBAR_TEXT, fontSize: '9.5px', lineHeight: '1.65' }}>
+                    {items.join('  ·  ')}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom group: Languages + Interests */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0px' }}>
+          {/* Languages */}
+          <div style={{ marginBottom: '22px' }}>
+            <div style={sectionHeader('Jezyki', true)}>Języki</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+              {cvData.languages.map((lang, i) => (
+                <div key={i} style={{ color: SIDEBAR_TEXT, fontSize: '10px' }}>{lang}</div>
+              ))}
+            </div>
+          </div>
+
+          {/* Interests */}
+          <div style={{ marginBottom: '0px' }}>
+            <div style={sectionHeader('Zainteresowania', true)}>Zainteresowania</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {cvData.interests.map((item, i) => (
+                <div key={i} style={{ color: SIDEBAR_MUTED, fontSize: '9.5px', lineHeight: '1.5' }}>
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ─── RIGHT MAIN CONTENT ─── */}
       <div
         style={{
           flex: 1,
-          padding: '36px 30px 36px 28px',
+          padding: '36px 32px 28px 30px',
           boxSizing: 'border-box',
           display: 'flex',
           flexDirection: 'column',
-          gap: '0px',
+          justifyContent: 'space-between',
           backgroundColor: '#FFFFFF',
-          overflowX: 'hidden',
+          overflow: 'hidden',
         }}
       >
         {/* Summary */}
-        <div style={{ marginBottom: '18px' }}>
+        <div style={{ marginBottom: '0px' }}>
           <div style={sectionHeader('Profil Zawodowy')}>Profil Zawodowy</div>
           <p style={{
-            fontSize: '8.5px',
+            fontSize: '10px',
             color: MUTED,
-            lineHeight: '1.7',
+            lineHeight: '1.75',
             margin: '0',
             textAlign: 'justify' as const,
           }}>
@@ -195,34 +190,39 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         </div>
 
         {/* Experience */}
-        <div style={{ marginBottom: '18px' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', marginTop: '18px' }}>
           <div style={sectionHeader('Doswiadczenie Zawodowe')}>Doświadczenie Zawodowe</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '13px' }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            flex: 1,
+          }}>
             {cvData.experience.map((exp) => (
               <div key={exp.id}>
                 <div style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'baseline',
-                  marginBottom: '2px',
+                  marginBottom: '3px',
                 }}>
                   <div>
                     <span style={{
                       fontFamily: 'Georgia, serif',
-                      fontSize: '10px',
+                      fontSize: '11.5px',
                       fontWeight: 'bold',
                       color: BODY,
                     }}>
                       {exp.position}
                     </span>
                     {exp.company && (
-                      <span style={{ fontSize: '9px', color: MUTED, marginLeft: '5px' }}>
+                      <span style={{ fontSize: '10px', color: MUTED, marginLeft: '5px' }}>
                         — {exp.company}
                       </span>
                     )}
                   </div>
                   <span style={{
-                    fontSize: '7.5px',
+                    fontSize: '9px',
                     color: SIDEBAR_ACCENT,
                     fontWeight: 'bold',
                     whiteSpace: 'nowrap' as const,
@@ -231,12 +231,12 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                     {exp.period}
                   </span>
                 </div>
-                <ul style={{ margin: '4px 0 0 0', padding: '0 0 0 14px', listStyle: 'disc' }}>
+                <ul style={{ margin: '3px 0 0 0', padding: '0 0 0 15px', listStyle: 'disc' }}>
                   {exp.bullets.map((bullet, i) => (
                     <li key={i} style={{
-                      fontSize: '8px',
+                      fontSize: '9.5px',
                       color: MUTED,
-                      lineHeight: '1.6',
+                      lineHeight: '1.65',
                       paddingLeft: '2px',
                     }}>
                       {bullet}
@@ -249,9 +249,9 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         </div>
 
         {/* Education */}
-        <div style={{ marginBottom: '14px' }}>
+        <div style={{ marginTop: '18px' }}>
           <div style={sectionHeader('Edukacja')}>Edukacja</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             {cvData.education.map((edu) => (
               <div key={edu.id}>
                 <div style={{
@@ -263,7 +263,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                   <div style={{ flex: 1 }}>
                     <div style={{
                       fontFamily: 'Georgia, serif',
-                      fontSize: '9px',
+                      fontSize: '10.5px',
                       fontWeight: 'bold',
                       color: BODY,
                       lineHeight: '1.4',
@@ -271,7 +271,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                       {edu.degree}
                     </div>
                     <div style={{
-                      fontSize: '7.5px',
+                      fontSize: '9px',
                       color: MUTED,
                       marginTop: '1px',
                     }}>
@@ -279,7 +279,7 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
                     </div>
                   </div>
                   <span style={{
-                    fontSize: '7.5px',
+                    fontSize: '9px',
                     color: SIDEBAR_ACCENT,
                     fontWeight: 'bold',
                     whiteSpace: 'nowrap' as const,
@@ -294,11 +294,11 @@ export const CVPrintTemplate = forwardRef<HTMLDivElement, Props>(({ cvData }, re
         </div>
 
         {/* RODO */}
-        <div style={{ marginTop: 'auto', paddingTop: '14px', borderTop: `1px solid ${DIVIDER}` }}>
+        <div style={{ marginTop: '18px', paddingTop: '12px', borderTop: `1px solid ${DIVIDER}` }}>
           <p style={{
-            fontSize: '6.5px',
+            fontSize: '7px',
             color: '#9CA3AF',
-            lineHeight: '1.5',
+            lineHeight: '1.55',
             margin: '0',
             textAlign: 'justify' as const,
             fontStyle: 'italic' as const,

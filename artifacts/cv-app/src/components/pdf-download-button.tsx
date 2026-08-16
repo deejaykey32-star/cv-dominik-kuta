@@ -46,29 +46,9 @@ export function PDFDownloadButton() {
         compress: true,
       });
 
-      const pxPerMm = canvas.width / A4_W;
-      const pageHeightPx = A4_H * pxPerMm;
-      const totalPages = Math.ceil(canvas.height / pageHeightPx);
-
-      for (let page = 0; page < totalPages; page++) {
-        if (page > 0) pdf.addPage();
-
-        // Crop the slice for this page
-        const srcY = page * pageHeightPx;
-        const srcH = Math.min(pageHeightPx, canvas.height - srcY);
-
-        const pageCanvas = document.createElement('canvas');
-        pageCanvas.width = canvas.width;
-        pageCanvas.height = pageHeightPx;
-
-        const ctx = pageCanvas.getContext('2d')!;
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
-        ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
-
-        const imgData = pageCanvas.toDataURL('image/jpeg', 0.97);
-        pdf.addImage(imgData, 'JPEG', 0, 0, A4_W, A4_H);
-      }
+      // Single page — template is exactly A4 height, render it 1:1
+      const imgData = canvas.toDataURL('image/jpeg', 0.97);
+      pdf.addImage(imgData, 'JPEG', 0, 0, A4_W, A4_H);
 
       pdf.save('Dominik_Kuta_CV.pdf');
     } catch (error) {
