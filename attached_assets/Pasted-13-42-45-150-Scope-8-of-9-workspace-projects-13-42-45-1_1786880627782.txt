@@ -1,0 +1,64 @@
+13:42:45.150
+Scope: 8 of 9 workspace projects
+13:42:45.163
+artifacts/api-server build$ node ./build.mjs
+13:42:45.163
+artifacts/cv-app build$ vite build --config vite.config.ts
+13:42:45.506
+artifacts/api-server build:   dist/index.mjs                       1.4mb ⚠️
+13:42:45.508
+artifacts/api-server build:   dist/pino-worker.mjs               153.4kb
+13:42:45.511
+artifacts/api-server build:   dist/pino-file.mjs                 142.1kb
+13:42:45.511
+artifacts/api-server build:   dist/pino-pretty.mjs               114.4kb
+13:42:45.511
+artifacts/api-server build:   dist/thread-stream-worker.mjs        7.3kb
+13:42:45.511
+artifacts/api-server build:   dist/index.mjs.map                   2.1mb
+13:42:45.511
+artifacts/api-server build:   dist/pino-worker.mjs.map           256.9kb
+13:42:45.512
+artifacts/api-server build:   dist/pino-file.mjs.map             229.0kb
+13:42:45.512
+artifacts/api-server build:   dist/pino-pretty.mjs.map           203.6kb
+13:42:45.512
+artifacts/api-server build:   dist/thread-stream-worker.mjs.map   12.0kb
+13:42:45.513
+artifacts/api-server build: ⚡ Done in 261ms
+13:42:45.515
+artifacts/api-server build: Done
+13:42:45.537
+artifacts/cv-app build: vite v7.3.6 building client environment for production...
+13:42:45.610
+artifacts/cv-app build: transforming...
+13:42:46.026
+artifacts/cv-app build: src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+13:42:51.945
+artifacts/cv-app build: ✓ 2044 modules transformed.
+13:42:52.313
+artifacts/cv-app build: rendering chunks...
+13:42:52.787
+artifacts/cv-app build: computing gzip size...
+13:42:52.827
+artifacts/cv-app build: dist/public/index.html                        0.66 kB │ gzip:   0.41 kB
+13:42:52.828
+artifacts/cv-app build: dist/public/assets/index-bXNrSyFe.css        98.36 kB │ gzip:  16.34 kB
+13:42:52.828
+artifacts/cv-app build: dist/public/assets/purify.es-Cz4mVeUR.js     28.98 kB │ gzip:  10.87 kB
+13:42:52.828
+artifacts/cv-app build: dist/public/assets/index.es-aT8t8LSK.js     158.91 kB │ gzip:  53.03 kB
+13:42:52.828
+artifacts/cv-app build: dist/public/assets/index-BV0IscjV.js      1,476.94 kB │ gzip: 447.85 kB
+13:42:52.829
+artifacts/cv-app build: 
+13:42:52.829
+artifacts/cv-app build: (!) Some chunks are larger than 500 kB after minification. Consider:
+13:42:52.829
+artifacts/cv-app build: - Using dynamic import() to code-split the application
+13:42:52.829
+artifacts/cv-app build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+13:42:52.829
+artifacts/cv-app build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+13:42:52.830
+artifacts/cv-app build: ✓ built in 7.27s
