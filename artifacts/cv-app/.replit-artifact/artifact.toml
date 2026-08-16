@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Dominik Kuta – CV"
+description = "Professional CV web app for Dominik Kuta. Displays a structured, ATS-friendly resume with light/dark theme toggle, PDF download, in-app content editing for the admin, and Firestore sync. Admin access is restricted to a specific Google account."
+version = "1.0.0"
+id = "artifacts/cv-app"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24321
+
+[services.development]
+run = "pnpm --filter @workspace/cv-app run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/cv-app", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/cv-app/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24321"
+BASE_PATH = "/"

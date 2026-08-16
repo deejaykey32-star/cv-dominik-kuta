@@ -1,6 +1,6 @@
-# [Project name]
+# Dominik Kuta – CV App
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Profesjonalna aplikacja CV dla Dominika Kuty z trybem jasnym/ciemnym, pobieraniem PDF, panelem admina przez Google Auth i synchronizacją z Firestore.
 
 ## Run & Operate
 
