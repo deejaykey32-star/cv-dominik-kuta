@@ -1,0 +1,116 @@
+2026-08-16T20:19:08.688Z	Initializing build environment...
+2026-08-16T20:19:08.688Z	Initializing build environment...
+2026-08-16T20:19:22.426Z	Success: Finished initializing build environment
+2026-08-16T20:19:22.945Z	Cloning repository...
+2026-08-16T20:19:24.507Z	Restoring from dependencies cache
+2026-08-16T20:19:24.510Z	Restoring from build output cache
+2026-08-16T20:19:26.231Z	Detected the following tools from environment: pnpm@10.26.1, nodejs@24.18.0
+2026-08-16T20:19:27.324Z	Installing project dependencies: pnpm install --frozen-lockfile
+2026-08-16T20:19:27.836Z	Scope: all 9 workspace projects
+2026-08-16T20:19:27.942Z	Lockfile is up to date, resolution step is skipped
+2026-08-16T20:19:27.989Z	Progress: resolved 1, reused 0, downloaded 0, added 0
+2026-08-16T20:19:28.057Z	Packages: +576
+2026-08-16T20:19:28.059Z	++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+2026-08-16T20:19:28.994Z	Progress: resolved 576, reused 0, downloaded 57, added 15
+2026-08-16T20:19:29.992Z	Progress: resolved 576, reused 0, downloaded 148, added 49
+2026-08-16T20:19:30.993Z	Progress: resolved 576, reused 0, downloaded 162, added 53
+2026-08-16T20:19:31.993Z	Progress: resolved 576, reused 0, downloaded 213, added 74
+2026-08-16T20:19:32.994Z	Progress: resolved 576, reused 0, downloaded 343, added 129
+2026-08-16T20:19:33.996Z	Progress: resolved 576, reused 0, downloaded 384, added 145
+2026-08-16T20:19:35.000Z	Progress: resolved 576, reused 0, downloaded 390, added 149
+2026-08-16T20:19:36.000Z	Progress: resolved 576, reused 0, downloaded 391, added 149
+2026-08-16T20:19:37.000Z	Progress: resolved 576, reused 0, downloaded 488, added 180
+2026-08-16T20:19:38.002Z	Progress: resolved 576, reused 0, downloaded 576, added 376
+2026-08-16T20:19:38.702Z	Progress: resolved 576, reused 0, downloaded 576, added 576, done
+2026-08-16T20:19:39.541Z	.../esbuild@0.27.3/node_modules/esbuild postinstall$ node install.js
+2026-08-16T20:19:39.614Z	.../esbuild@0.27.3/node_modules/esbuild postinstall: Done
+2026-08-16T20:19:39.900Z	
+2026-08-16T20:19:39.902Z	dependencies:
+2026-08-16T20:19:39.902Z	+ @replit/connectors-sdk 0.4.1
+2026-08-16T20:19:39.902Z	
+2026-08-16T20:19:39.902Z	devDependencies:
+2026-08-16T20:19:39.902Z	+ prettier 3.9.6
+2026-08-16T20:19:39.903Z	+ typescript 5.9.3
+2026-08-16T20:19:39.903Z	
+2026-08-16T20:19:39.972Z	. preinstall$ sh -c 'rm -f package-lock.json yarn.lock; case "$npm_config_user_agent" in pnpm/*) ;; *) echo "Use pnpm instead" >&2; exit 1 ;; esac'
+2026-08-16T20:19:40.003Z	. preinstall: Done
+2026-08-16T20:19:40.160Z	╭ Warning ─────────────────────────────────────────────────────────────────────╮
+2026-08-16T20:19:40.161Z	│                                                                              │
+2026-08-16T20:19:40.161Z	│   Ignored build scripts: @firebase/util@1.15.2, core-js@3.50.0,              │
+2026-08-16T20:19:40.162Z	│   protobufjs@7.6.5.                                                          │
+2026-08-16T20:19:40.162Z	│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+2026-08-16T20:19:40.162Z	│   to run scripts.                                                            │
+2026-08-16T20:19:40.163Z	│                                                                              │
+2026-08-16T20:19:40.163Z	╰──────────────────────────────────────────────────────────────────────────────╯
+2026-08-16T20:19:40.176Z	Done in 12.7s using pnpm v10.26.1
+2026-08-16T20:19:40.346Z	Executing user build command: pnpm run build
+2026-08-16T20:19:40.722Z	
+2026-08-16T20:19:40.722Z	> workspace@0.0.0 build /opt/buildhome/repo
+2026-08-16T20:19:40.722Z	> pnpm run typecheck && PORT=3000 BASE_PATH=/ pnpm -r --if-present run build
+2026-08-16T20:19:40.722Z	
+2026-08-16T20:19:41.076Z	
+2026-08-16T20:19:41.076Z	> workspace@0.0.0 typecheck /opt/buildhome/repo
+2026-08-16T20:19:41.076Z	> pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-08-16T20:19:41.076Z	
+2026-08-16T20:19:41.498Z	
+2026-08-16T20:19:41.500Z	> workspace@0.0.0 typecheck:libs /opt/buildhome/repo
+2026-08-16T20:19:41.501Z	> tsc --build
+2026-08-16T20:19:41.501Z	
+2026-08-16T20:19:44.458Z	Scope: 4 of 9 workspace projects
+2026-08-16T20:19:44.475Z	artifacts/api-server typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-16T20:19:44.475Z	artifacts/cv-app typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-16T20:19:46.478Z	artifacts/api-server typecheck: Done
+2026-08-16T20:19:46.482Z	artifacts/mockup-sandbox typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-16T20:19:54.335Z	artifacts/cv-app typecheck: Done
+2026-08-16T20:19:54.338Z	scripts typecheck$ tsc -p tsconfig.json --noEmit
+2026-08-16T20:19:55.664Z	scripts typecheck: Done
+2026-08-16T20:19:55.842Z	artifacts/mockup-sandbox typecheck: Done
+2026-08-16T20:19:56.333Z	Scope: 8 of 9 workspace projects
+2026-08-16T20:19:56.350Z	artifacts/cv-app build$ vite build --config vite.config.ts
+2026-08-16T20:19:56.350Z	artifacts/api-server build$ node ./build.mjs
+2026-08-16T20:19:56.815Z	artifacts/cv-app build: vite v7.3.6 building client environment for production...
+2026-08-16T20:19:56.825Z	artifacts/api-server build:   dist/index.mjs                       1.4mb ⚠️
+2026-08-16T20:19:56.826Z	artifacts/api-server build:   dist/pino-worker.mjs               153.4kb
+2026-08-16T20:19:56.830Z	artifacts/api-server build:   dist/pino-file.mjs                 142.1kb
+2026-08-16T20:19:56.830Z	artifacts/api-server build:   dist/pino-pretty.mjs               114.4kb
+2026-08-16T20:19:56.831Z	artifacts/api-server build:   dist/thread-stream-worker.mjs        7.3kb
+2026-08-16T20:19:56.834Z	artifacts/api-server build:   dist/index.mjs.map                   2.1mb
+2026-08-16T20:19:56.834Z	artifacts/api-server build:   dist/pino-worker.mjs.map           256.9kb
+2026-08-16T20:19:56.836Z	artifacts/api-server build:   dist/pino-file.mjs.map             229.0kb
+2026-08-16T20:19:56.836Z	artifacts/api-server build:   dist/pino-pretty.mjs.map           203.6kb
+2026-08-16T20:19:56.836Z	artifacts/api-server build:   dist/thread-stream-worker.mjs.map   12.0kb
+2026-08-16T20:19:56.837Z	artifacts/api-server build: ⚡ Done in 380ms
+2026-08-16T20:19:56.850Z	artifacts/api-server build: Done
+2026-08-16T20:19:56.916Z	artifacts/cv-app build: transforming...
+2026-08-16T20:19:57.386Z	artifacts/cv-app build: src/components/ui/tooltip.tsx (2:0): Error when using sourcemap for reporting an error: Can't resolve original location of error.
+2026-08-16T20:20:03.571Z	artifacts/cv-app build: ✓ 2044 modules transformed.
+2026-08-16T20:20:04.076Z	artifacts/cv-app build: rendering chunks...
+2026-08-16T20:20:04.902Z	artifacts/cv-app build: computing gzip size...
+2026-08-16T20:20:04.952Z	artifacts/cv-app build: dist/public/index.html                        0.66 kB │ gzip:   0.41 kB
+2026-08-16T20:20:04.954Z	artifacts/cv-app build: dist/public/assets/index-bXNrSyFe.css        98.36 kB │ gzip:  16.34 kB
+2026-08-16T20:20:04.955Z	artifacts/cv-app build: dist/public/assets/purify.es-Cz4mVeUR.js     28.98 kB │ gzip:  10.87 kB
+2026-08-16T20:20:04.957Z	artifacts/cv-app build: dist/public/assets/index.es-2WSUF2B6.js     158.91 kB │ gzip:  53.03 kB
+2026-08-16T20:20:04.959Z	artifacts/cv-app build: dist/public/assets/index-CF9CnhCd.js      1,298.31 kB │ gzip: 393.96 kB
+2026-08-16T20:20:04.959Z	artifacts/cv-app build: ✓ built in 8.10s
+2026-08-16T20:20:04.959Z	artifacts/cv-app build: 
+2026-08-16T20:20:04.959Z	artifacts/cv-app build: (!) Some chunks are larger than 500 kB after minification. Consider:
+2026-08-16T20:20:04.959Z	artifacts/cv-app build: - Using dynamic import() to code-split the application
+2026-08-16T20:20:04.960Z	artifacts/cv-app build: - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2026-08-16T20:20:04.960Z	artifacts/cv-app build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2026-08-16T20:20:05.085Z	artifacts/cv-app build: Done
+2026-08-16T20:20:05.115Z	Success: Build command completed
+2026-08-16T20:20:05.264Z	Executing user deploy command: npx wrangler deploy
+2026-08-16T20:20:05.851Z	npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+2026-08-16T20:20:05.851Z	npm warn Unknown project config "strict-peer-dependencies". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+2026-08-16T20:20:06.454Z	npm warn exec The following package was not found and will be installed: wrangler@4.123.0
+2026-08-16T20:20:15.086Z	
+2026-08-16T20:20:15.086Z	 ⛅️ wrangler 4.123.0
+2026-08-16T20:20:15.086Z	────────────────────
+2026-08-16T20:20:15.473Z	
+2026-08-16T20:20:15.473Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2026-08-16T20:20:15.474Z	
+2026-08-16T20:20:15.537Z	✘ [ERROR] The Cloudflare application detection logic has been run in the root of a workspace instead of targeting a specific project. Change your working directory to one of the applications in the workspace and try again.
+2026-08-16T20:20:15.538Z	
+2026-08-16T20:20:15.538Z	
+2026-08-16T20:20:15.546Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2026-08-16_20-20-14_630.log"
+2026-08-16T20:20:15.628Z	Failed: error occurred while running deploy command
